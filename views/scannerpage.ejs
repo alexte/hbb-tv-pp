@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//HbbTV//1.1.1//EN" "http://www.hbbtv.org/dtd/HbbTV-1.1.1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>HbbTV PP</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="application/vnd.hbbtv.xml+xhtml; utf-8" />
+	<style>
+		* {
+		    padding: 0;
+		    margin: 0;
+		    border: none;
+		}
+		html {
+		    background-color:transparent;
+		}
+		body {
+		    width:1280px;
+		    height:720px;
+		    background:transparent;
+		    margin:0;
+		    overflow:hidden;
+		}
+		a {
+		    border-left: 5px solid #AAA;
+		    margin: 20px;
+		    color: black;
+		    padding: 10px;
+		    line-height: 70px;
+		    text-decoration:none;
+		}
+		a.act {
+		    border-left: 5px solid red;
+		    background-color: #FFF;
+		}
+		div#menu { display:none; 
+    			background:rgb(160,160,160);  
+    			background: transparent\9;  
+    			background:rgba(160,160,160,0.6);  
+			color:black; 
+			font-size:30px; margin:10px; padding:10px; 
+			position:absolute; right:10px; top:20px; }
+		div#debug { display:none;
+			background-color:#AAA; color:black; 
+			font-size:20px; padding:10px; 
+			position:absolute; left:10px; top:20px; }
+		div#redbutton { 
+			background-color:#AAA; color:black; 
+			font-size:20px; padding:10px; 
+			position:absolute; right:10px; bottom:20px; }
+	</style>
+	<script type="text/javascript">
+
+	    var active=false;
+	    var anchors;
+
+	    window.onload = function ()
+	    {
+  		try
+  		{
+    		    var app = document.getElementById ('appmgr').getOwnerApplication (document);
+    		    app.show ();
+    		    app.activate ();
+  		} catch (e) { }
+		setTimeout(function () { document.getElementById ('redbutton').style.display="none"; },5000);
+		document.addEventListener( "keypress", key, false);
+		set_keymask(1);
+		anchors=new arrow_keys_handler();
+
+		document.getElementById("close").onClick=close_menu;
+	    }
+
+	    function arrow_keys_handler()
+	    {
+		this.ans=document.getElementsByTagName("a");
+		this.i=0;
+		this.n=this.ans.length;
+		this.down=function () {
+		    this.ans[this.i].className="";
+		    this.i=(this.i+1)%this.n;
+		    this.ans[this.i].className="act";
+		    debug(this.i);
+		};
+		this.up=function () {
+		    this.ans[this.i].className="";
+		    this.i=(this.n+this.i-1)%this.n;
+		    this.ans[this.i].className="act";
+		    debug(this.i);
+		};
+		this.click=function () {
+		    if (this.ans[this.i].onClick) this.ans[this.i].onClick();
+		    else if (this.ans[this.i].href!="#") window.location.href=this.ans[this.i].href;
+		};
+
+		if (this.n==0) return;
+		
+		this.ans[this.i].className="act";
+	    }
+
+// 1 red 2 green 4 yellow 8 blue 16 cursor
+	    function set_keymask(mask)
+	    {
+  		try { var app = document.getElementById ('appmgr').getOwnerApplication (document); app.privateData.keyset.setValue (mask); } catch (e) { }
+  		try { document.getElementById ('oipfcfg').keyset.value = mask; } catch (e2) { }
+	    }
+
+	    var KC_RED=403;
+	    var KC_UP=38;
+	    var KC_DOWN=40;
+	    var KC_ENTER=13;
+
+	    function hide(id)
+	    {
+		var obj=document.getElementById(id);
+		if (obj) obj.style.display="none";
+	    }
+
+	    function show(id)
+	    {
+		var obj=document.getElementById(id);
+		if (obj) obj.style.display="block";
+	    }
+
+	    function open_menu()
+	    {
+		active=true;
+		show("menu");
+		set_keymask(31);
+	    }
+
+	    function close_menu()
+	    {
+		active=false;
+		hide("menu");
+		set_keymask(1);
+	    }
+
+	    function key(e)
+	    {
+		// debug("keypress "+e.keyCode+" "+e.charCode);
+		if (e.keyCode==KC_UP) anchors.up();
+		if (e.keyCode==KC_DOWN) anchors.down();
+		if (e.keyCode==KC_ENTER) anchors.click();
+		if (e.keyCode==KC_RED)
+		{
+		    if (!active) open_menu();
+		    else	 close_menu();
+		}
+		e.preventDefault();
+	    }
+
+	    function debug(str)
+	    {
+    		var debug=document.getElementById ('debug');
+		debug.style.display="block";
+		debug.textContent=str;
+		setTimeout(function () { debug.style.display="none"; },5000);
+	    }
+
+	</script>
+</head>
+<body>
+    <div>
+	<object id="appmgr" type="application/oipfApplicationManager" style="position: absolute; left: 0px; top: 0px; width: 0px; height: 0px;"></object>
+	<object id="oipfcfg" type="application/oipfConfiguration" style="position: absolute; left: 0px; top: 0px; width: 0px; height: 0px;"></object>
+
+	<div id=redbutton>Scannermode</div>
+	<div id=menu>
+	     Dieser Sender bietet Hbb-TV.<br>
+	     Der Scanner hat den Portal URL gespeichert.<br>
+	     <a href="?mode=proxy">Scanner deaktivieren</a><br>
+	     <a id="close" href="#">Schließen</a><br>
+	</div>
+	<div id=debug>Debug</div>
+    </div>
+</body>
+</html>

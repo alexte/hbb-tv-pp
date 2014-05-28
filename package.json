@@ -1,0 +1,16 @@
+
+{
+  "name": "hpp",
+  "description": "Hbb-TV Privacy Proxy",
+  "author": "Alexander Terczka",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "ejs": "1.x",
+    "node-getopt": "0.2.x",
+    "http-proxy": "1.1.x"
+  },
+  "engine": "node >= 0.10.26"
+}
+
