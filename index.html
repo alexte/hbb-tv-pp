@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Hbb-tv-pp by alexte</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Hbb-tv-pp : Hbb-TV Privacy Proxy" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Hbb-tv-pp</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Hbb-tv-pp</h1>
-          <h2>Hbb-TV Privacy Proxy</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/alexte/hbb-tv-pp">View on GitHub</a>
+
+          <h1 id="project_title">Hbb-tv-pp</h1>
+          <h2 id="project_tagline">Hbb-TV Privacy Proxy</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/alexte/hbb-tv-pp/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/alexte/hbb-tv-pp/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/alexte/hbb-tv-pp/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/alexte/hbb-tv-pp/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/alexte/hbb-tv-pp" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a name="hbb-tv-pp" class="anchor" href="#hbb-tv-pp"><span class="octicon octicon-link"></span></a>hbb-tv-pp</h1>
 
 <p>Hbb-TV Privacy Proxy</p>
@@ -43,7 +43,7 @@ stations have Hbb-TV allready up and running. </p>
 <p>About Hbb-TV: <a href="http://en.wikipedia.org/wiki/Hybrid_Broadcast_Broadband_TV">http://en.wikipedia.org/wiki/Hybrid_Broadcast_Broadband_TV</a></p>
 
 <p>Technically Hbb-TV is based on HTTP/HTML/HTML-CE, a web browser 
-with some additions for video streaming und IR remote controller handling.
+with some additions for video streaming and IR remote controller handling.
 In the DVB data stream of these TV stations an URL is sent, which 
 is loaded by this web browser in your TV set.</p>
 
@@ -53,20 +53,20 @@ is loaded by this web browser in your TV set.</p>
 <p>If Hbb-TV is activated, your TV set sends a web request every time
 you're changing channels. Which means the broadcasting companies 
 can monitor exactly when and how long your are watching their channel.
-And worse, this web pages often include additional statistic features like 
-google analytics. </p>
+And even worse, these web pages often include data collecting features 
+like google analytics. </p>
 
 <h2>
 <a name="solution-" class="anchor" href="#solution-"><span class="octicon octicon-link"></span></a>Solution ?</h2>
 
 <p>"hbb-tv-pp" is a proxy that filters the requests from your TV set,
-replaces it with it's own menu and takes you in controll when and if
-you want to get web pages from the TV station.</p>
+replaces it with it's own menu and takes you in control. It's your
+decision when and if you want to get web pages from the TV station.</p>
 
 <h2>
 <a name="howto" class="anchor" href="#howto"><span class="octicon octicon-link"></span></a>HOWTO</h2>
 
-<p>You need a Linux firewall to setup an transparent proxy, 
+<p>You need a Linux firewall to setup a transparent proxy, 
 and node.js to run this proxy.</p>
 
 <pre><code>&gt; npm install 
@@ -87,21 +87,24 @@ Usage: node hpp.js
 through all your channels. hbb-tv-pp will remember all start pages
 from your channel list. </p>
 
-<p>After that you can change to privacyproxy mode. In this mode all
-start pages are filtered but the using the red button your can 
+<p>After this setup you can change to privacyproxy mode. In this mode all
+start pages are filtered but with the red button you can 
 intentionally open the original hbb-tv content.</p>
 
 <p>If you want to start hbb-tv-pp in background at system start consider using "screen" or "forever"
 (<a href="http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever/">http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever/</a>). </p>
-        </section>
-
-        <footer>
-          Hbb-tv-pp is maintained by <a href="https://github.com/alexte">alexte</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Hbb-tv-pp maintained by <a href="https://github.com/alexte">alexte</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
