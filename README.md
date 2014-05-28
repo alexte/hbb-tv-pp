@@ -21,20 +21,20 @@ Privacy ?
 If Hbb-TV is activated, your TV set sends a web request every time
 you're changing channels. Which means the broadcasting companies 
 can monitor exactly when and how long your are watching their channel.
-And even worse, these web pages often include additional statistic features 
+And even worse, these web pages often include data collecting features 
 like google analytics. 
 
 Solution ?
 ----------
 
 "hbb-tv-pp" is a proxy that filters the requests from your TV set,
-replaces it with it's own menu and takes you in control when and if
-you want to get web pages from the TV station.
+replaces it with it's own menu and takes you in control. It's your
+decision when and if you want to get web pages from the TV station.
 
 HOWTO
 -----
 
-You need a Linux firewall to setup an transparent proxy, 
+You need a Linux firewall to setup a transparent proxy, 
 and node.js to run this proxy.
 
 ```
@@ -57,7 +57,7 @@ through all your channels. hbb-tv-pp will remember all start pages
 from your channel list. 
 
 After this setup you can change to privacyproxy mode. In this mode all
-start pages are filtered but with the red button your can 
+start pages are filtered but with the red button you can 
 intentionally open the original hbb-tv content.
 
 If you want to start hbb-tv-pp in background at system start consider using "screen" or "forever"
