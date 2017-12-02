@@ -74,7 +74,7 @@ function filter_body(buffer)
 function logger(req,res,next)
 {
     var d=new Date();
-    console.log("Log: "+d+" "+req.method+" "+req.protocol+"://"+req.host+req.originalUrl);
+    console.log("Log: "+d+" "+req.method+" "+req.protocol+"://"+req.hostname+req.originalUrl);
     next();
 }
 
@@ -93,13 +93,13 @@ function scanner(req,res,next)
 	console.log("sending scannerpage");
         res.setHeader('Cache-Control', 'private'); // 4 days
         res.setHeader('Expires', new Date(Date.now()).toUTCString());
-	res.render("scannerpage.ejs",{ buttontext:"Scanner Mode" });
+	res.render("scannerpage.ejs");
 	if(req.method=="GET")
 	{
-	    if (blocklist.indexOf(req.host+req.originalUrl)<0)
+	    if (blocklist.indexOf(req.hostname+req.originalUrl)<0)
 	    {
-		blocklist.push(req.host+req.originalUrl);
-		console.log("Filter added: "+req.host+req.originalUrl);
+		blocklist.push(req.hostname+req.originalUrl);
+		console.log("Filter added: "+req.hostname+req.originalUrl);
 		write_blocklist();
 	    }
 	}
@@ -107,12 +107,12 @@ function scanner(req,res,next)
     }
     if (req.method=="GET" || req.method=="HEAD")
     {
-	if (blocklist.indexOf(req.host+req.originalUrl)>=0)
+	if (blocklist.indexOf(req.hostname+req.originalUrl)>=0)
 				// in standard mode
 	{
             res.setHeader('Cache-Control', 'private'); // 4 days
             res.setHeader('Expires', new Date(Date.now()).toUTCString());
-	    res.render("proxypage.ejs",{ buttontext:"Proxy Mode" });
+	    res.render("proxypage.ejs");
 	    return;
 	}
     }
@@ -142,8 +142,8 @@ function write_blocklist()
 app.use(logger);
 app.use(scanner);
 app.use(function(req,res) {
-   console.log("Fall through proxy "+req.host+req.originalUrl);
-   proxy.web(req, res, {target:"http://"+req.host});
+   console.log("Fall through proxy "+req.hostname+req.originalUrl);
+   proxy.web(req, res, {target:"http://"+req.hostname});
 });
 
 opt=require('node-getopt').create([

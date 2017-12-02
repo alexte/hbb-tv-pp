@@ -7,7 +7,6 @@
   "private": true,
   "dependencies": {
     "express": "4.x",
-    "ejs": "1.x",
     "node-getopt": "0.2.x",
     "http-proxy": "1.1.x"
   },
